@@ -13,6 +13,7 @@ public class seaweed : item
             {
 
                 other.gameObject.transform.position -= new Vector3(0,0,deltaY);
+                Destroy(this.gameObject);
             }
                 
         }
