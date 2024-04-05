@@ -1,14 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
 
     private Vector2 playerPos;
 
     private float minX = -15, maxX = 15, middleX = 0, middleY = 3.5f, deltaX;
+    public int HealthPoint;
+    public TextMeshProUGUI healthPointsText;
+    private string healthText = "Health Points : ";
     private InputPlayer input;
 #region Singleton
     private static Player _instance;
@@ -25,6 +30,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(middleX,transform.position.y, middleY);
         input.Move.Enable();
         deltaX = maxX - middleX;
+        healthPointsText.text = healthText + HealthPoint.ToString();
         
     }
 
