@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     {
         input.Move.left.started += playerLeft;
         input.Move.right.started += playerRight;
+        input.Move.jump.started += playerJump;
     }
 
     private void playerRight(InputAction.CallbackContext context)
@@ -53,5 +54,22 @@ public class Player : MonoBehaviour
         Debug.Log("left");
         if(transform.position.x - deltaX >= minX)
             transform.position -= new Vector3(deltaX, 0, 0);
+    }
+
+    private void playerJump(InputAction.CallbackContext context){
+        Debug.Log("jump");
+        //
+    }
+
+    public void UpdateHealth(int newHealth){
+        if(newHealth <= 0){
+            healthPointsText.text = "you're dead bro!";
+            Destroy(this.gameObject);
+            input.Move.Disable();
+            return;
+        }
+            
+        HealthPoint = newHealth;
+        healthPointsText.text = healthText + HealthPoint.ToString();
     }
 }

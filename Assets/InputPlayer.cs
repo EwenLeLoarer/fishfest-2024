@@ -44,6 +44,15 @@ public partial class @InputPlayer: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d52b7c1-036e-4868-a71b-69aa920c879a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @InputPlayer: IInputActionCollection2, IDisposable
                     ""action"": ""right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80b21249-ffcc-488b-86c6-769488325fe6"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -84,6 +104,7 @@ public partial class @InputPlayer: IInputActionCollection2, IDisposable
         m_Move = asset.FindActionMap("Move", throwIfNotFound: true);
         m_Move_left = m_Move.FindAction("left", throwIfNotFound: true);
         m_Move_right = m_Move.FindAction("right", throwIfNotFound: true);
+        m_Move_jump = m_Move.FindAction("jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -147,12 +168,14 @@ public partial class @InputPlayer: IInputActionCollection2, IDisposable
     private List<IMoveActions> m_MoveActionsCallbackInterfaces = new List<IMoveActions>();
     private readonly InputAction m_Move_left;
     private readonly InputAction m_Move_right;
+    private readonly InputAction m_Move_jump;
     public struct MoveActions
     {
         private @InputPlayer m_Wrapper;
         public MoveActions(@InputPlayer wrapper) { m_Wrapper = wrapper; }
         public InputAction @left => m_Wrapper.m_Move_left;
         public InputAction @right => m_Wrapper.m_Move_right;
+        public InputAction @jump => m_Wrapper.m_Move_jump;
         public InputActionMap Get() { return m_Wrapper.m_Move; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -168,6 +191,9 @@ public partial class @InputPlayer: IInputActionCollection2, IDisposable
             @right.started += instance.OnRight;
             @right.performed += instance.OnRight;
             @right.canceled += instance.OnRight;
+            @jump.started += instance.OnJump;
+            @jump.performed += instance.OnJump;
+            @jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IMoveActions instance)
@@ -178,6 +204,9 @@ public partial class @InputPlayer: IInputActionCollection2, IDisposable
             @right.started -= instance.OnRight;
             @right.performed -= instance.OnRight;
             @right.canceled -= instance.OnRight;
+            @jump.started -= instance.OnJump;
+            @jump.performed -= instance.OnJump;
+            @jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IMoveActions instance)
@@ -208,5 +237,6 @@ public partial class @InputPlayer: IInputActionCollection2, IDisposable
     {
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }

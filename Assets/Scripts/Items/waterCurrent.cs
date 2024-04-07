@@ -13,7 +13,10 @@ public class waterCurrent : item
                 other.gameObject.transform.position += new Vector3(0,0,deltaY);
                 Destroy(this.gameObject);
             }
-                
+            else{
+                other.gameObject.GetComponent<Player>().UpdateHealth(other.gameObject.GetComponent<Player>().HealthPoint-1);
+                Destroy(this.gameObject);
+            }  
         }
     }
 }

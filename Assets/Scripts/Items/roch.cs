@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class seaweed : item
+public class roch : item
 {
-
-    private void OnTriggerEnter(Collider other){
+    // Start is called before the first frame update
+   private void OnTriggerEnter(Collider other){
         if(other.CompareTag("Player")){
             Debug.Log("collide");
+            other.gameObject.GetComponent<Player>().UpdateHealth(other.gameObject.GetComponent<Player>().HealthPoint-1);
             if((float)other.gameObject.transform.position.z - deltaY >= minY)
             {
 
