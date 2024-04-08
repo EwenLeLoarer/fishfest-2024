@@ -11,7 +11,7 @@ public class roch : item
             other.gameObject.GetComponent<Player>().UpdateHealth(other.gameObject.GetComponent<Player>().HealthPoint-1);
             if((float)other.gameObject.transform.position.z - deltaY >= minY)
             {
-
+                GameManager.Instance.PlayAudio(4);
                 other.gameObject.transform.position -= new Vector3(0,0,deltaY);
                 Destroy(this.gameObject);
             }

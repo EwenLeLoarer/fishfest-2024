@@ -17,14 +17,14 @@ public class objectSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(timer > 0){
             timer -= Time.deltaTime;
         }
         else{
             int id = Random.Range(0,itemTemplate.Count);
-            Instantiate(itemTemplate[id], /*this.transform.position - new UnityEngine.Vector3((itemTemplate[id].GetComponent<BoxCollider>().size.x/2)*itemTemplate[id].transform.localScale.x,0,0), quaternion.identity,*/this.transform );
+            Instantiate(itemTemplate[id],this.transform );
             timer = Random.Range(2f,10f);
             Debug.Log(timer);
         } 

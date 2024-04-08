@@ -13,9 +13,9 @@ public class item : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        this.gameObject.transform.position -= new Vector3(0,0,0.2f);
+        this.gameObject.transform.position -= new Vector3(0,0,0.4f);
         Destroy(this.gameObject, 15f);
     }
 }

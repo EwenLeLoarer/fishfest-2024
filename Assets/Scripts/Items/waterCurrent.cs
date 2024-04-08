@@ -9,7 +9,7 @@ public class waterCurrent : item
             Debug.Log("collide");
             if((float)other.gameObject.transform.position.z + deltaY <= maxY)
             {
-
+                GameManager.Instance.PlayAudio(0);
                 other.gameObject.transform.position += new Vector3(0,0,deltaY);
                 Destroy(this.gameObject);
             }
