@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class objectSpawner : MonoBehaviour
 {
@@ -14,13 +17,14 @@ public class objectSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(timer > 0){
             timer -= Time.deltaTime;
         }
         else{
-            Instantiate(itemTemplate[Random.Range(0,itemTemplate.Count)],this.transform);
+            int id = Random.Range(0,itemTemplate.Count);
+            Instantiate(itemTemplate[id],this.transform );
             timer = Random.Range(2f,10f);
             Debug.Log(timer);
         } 
